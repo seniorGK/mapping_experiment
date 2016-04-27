@@ -2,14 +2,24 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"log"
 	"os"
 )
 
-func main() {
-	f, err := os.Open("data/foo.txt")
+var inputFile string
+
+// Parse command line options
+func parse_command_line() {
+	flag.StringVar(&inputFile, "file", "", "Use file as input source")
+	flag.Parse()
+}
+
+// Parse input file and print to the output
+func parse_file(input string) {
+	f, err := os.Open(input)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -35,5 +45,13 @@ func main() {
 		}
 
 		fmt.Println(string(line))
+	}
+}
+
+func main() {
+	parse_command_line()
+
+	if inputFile != "" {
+		parse_file(inputFile)
 	}
 }
