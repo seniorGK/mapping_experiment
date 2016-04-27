@@ -46,6 +46,7 @@ func parse_file(input string) {
 
 		fmt.Println(string(line))
 	}
+	f.Close()
 }
 
 func main() {
